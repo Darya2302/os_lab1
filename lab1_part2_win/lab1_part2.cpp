@@ -16,7 +16,7 @@ void* threadFunc(void* arg) {
     while (!exitFlag) {
         double randomNum = (double)rand() / RAND_MAX;
         std::cout << randomNum << std::endl;
-        sleep(1300);
+        _sleep(1300);
     }
 
     pthread_exit(NULL);
@@ -41,8 +41,8 @@ int main() {
 
     // Создаем поток
     pthread_t thread;
-    pthread_create(&thread, NULL, threadFunc, NULL, 0, NULL);
-    pthread_create(&thread, NULL, reversString, NULL, 0, NULL);
+    pthread_create(&thread, NULL, threadFunc, NULL);
+    pthread_create(&thread, NULL, (void *(_cdecl*) (void*))reversString, NULL);
 
     // Устанавливаем обработчик сигнала SIGINT
     signal(SIGINT, sigintHandler);
