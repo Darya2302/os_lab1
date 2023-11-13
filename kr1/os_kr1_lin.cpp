@@ -59,27 +59,9 @@ void modifyBalance(BankAccount& account, const vector<double>& changes) {
 }
 
 int main(int argc, char** argv) {
-    // Контроль количества операций и их значений через флаги командной строки
     vector<double> changes;
-    if (argc > 1) {
-        int numChanges = atoi(argv[1]);
-        for (int i = 2; i < argc; i++) {
-            double change = atof(argv[i]);
-            changes.push_back(change);
-        }
-
-        if (changes.size() < numChanges) {
-            cerr << "Quantity of operations is less" << endl;
-            return 1;
-        }
-        else if (changes.size() > numChanges) {
-            cerr << "Quantity of operations is more" << endl;
-            return 1;
-        }
-    }
-    else {
-        changes = { -120, 10, 15, -40, -30, 90 }; // Пример сценария операций
-    }
+   
+    changes = { -120, 10, 15, -40, -30, 90 }; // Пример сценария операций
 
     BankAccount account(100);
     thread t(modifyBalance, ref(account), ref(changes));
